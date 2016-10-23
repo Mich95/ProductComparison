@@ -1,0 +1,140 @@
+insert into category values (1,'Store root category','Store root category',null,'DisplayCategory.php');
+insert into category values (2,'Men''s Clothing','Clothing of all types - trousers, jackets, etc.',null,'DisplayCategory.php');
+insert into category values (3,'Jeans','Jeans: Denim, cotton, etc.',null,'DisplayCategory.php');
+insert into category values (4,'Denim Jeans','Denim jeans',null,'DisplayCategory.php');
+insert into category values (5,'Boot cut jeans','Boot cut jeans',null,'DisplayProducts.php');
+insert into category values (6,'Straight cut jeans','Straight cut jeans',null,'DisplayProducts.php');
+insert into category values (7,'Shoes and boots','Shoes and boots','shoes.jpg','DisplayCategory.php');
+insert into category values (8,'Computers','Computers','computers.jpg','DisplayCategory.php');
+insert into category values (9,'Laptop computers','Laptop computers','laptop.jpg','DisplayProducts.php');
+insert into category values (10,'Servers','Rackmount and tower servers','server.jpg','DisplayProducts.php');
+insert into category values (11,'Shirts','Shirts of all kinds','shirts.jpg','DisplayCategory.php');
+insert into category values (12,'Trousers','Trousers, jeans, shorts','trousers.jpg','DisplayCategory.php');
+insert into category values (13,'Jackets','Sports jackets, blazers, etc.','jackets.jpg','DisplayCategory.php');
+insert into category values (14,'Business shirts','Cotton and cotton blend business shirts','bshirt.jpg','DisplayCategory.php');
+insert into category values (15,'Short-sleeved shirts','With collars and short sleeves','sshirt.jpg','DisplayCategory.php');
+insert into category values (16,'T-shirts','Tees: plain and with designs','tshirt.jpg','DisplayCategory.php');
+
+insert into PRODUCT values (1,'Null Product','Null product','null.jpg','Null product','NULL','DisplayProduct.php');
+insert into PRODUCT values (2,'Dell XPS 13','Dell XPS 13.3" Touchscreen Laptop','Dell_XPS_13.jpg','This laptop has a virtually borderless InfinityEdge display — amazing both inside and out.','DELLXPS13','DisplayProduct.php');
+insert into PRODUCT values (3,'Levi 504','Levi 504 Cord Jeans','levi_504.jpg','Light-weight corduroy is perfect for those hot summer days! Look cool and be cool. Available in blue, brown and black.','LEVI504','DisplayProduct.php');
+insert into PRODUCT values (4,'Alienware 17','Alienware 17 17.3" Gaming Laptop','Alienware_17.jpg','Engineered for high-performance gaming, combining jaw-dropping power with mind-blowing graphics capabilities.','ALIENWARE17','DisplayProduct.php');
+insert into PRODUCT values (5,'HP Spectre','HP Spectre 13-V001TU 13.3" Laptop (i5)','HP_Spectre_13.jpg','Crafted with durable aluminum and carbon fiber, this impossibly thin laptop redefines perfection.','HPSPECTRE13','DisplayProduct.php');
+insert into PRODUCT values (6,'HP Omen 17','HP Omen 17-W007TX 17" Laptop','HP_Omen_17.jpg','Equipped with powerful hardware and a venomous design, OMEN laptops are ready for the challenge, anytime, anywhere.','HPOMEN17','DisplayProduct.php');
+insert into PRODUCT values (7,'Lenovo IdeaPad 110','Lenovo IdeaPad 110 15.6" Laptop (AMD A6)','Lenovo_IP_110.jpg','Get the features you need without the big price tag from this value-priced laptop: dependable processing power, good memory, lots of storage, an attractive display, and integrated graphics.','LENOVOIP110','DisplayProduct.php');
+insert into PRODUCT values (8,'Apple MacBook Air 13','Apple MacBook Air 13" 128GB Laptop','MacBook_Air_13.jpg','Features up to 8GB of memory, a fifth-generation Intel Core processor, Thunderbolt 2, great built-in apps and all-day battery life.','MBAIR13','DisplayProduct.php');
+
+insert into CGRYREL values (1,1,2,null);
+insert into CGRYREL values (2,2,3,null);
+insert into CGRYREL values (3,3,4,null);
+insert into CGRYREL values (4,3,5,null);
+insert into CGRYREL values (5,3,6,null);
+insert into CGRYREL values (6,4,5,null);
+insert into CGRYREL values (7,4,6,null);
+insert into CGRYREL values (8,2,7,null);
+insert into CGRYREL values (9,2,11,null);
+insert into CGRYREL values (10,2,12,null);
+insert into CGRYREL values (11,12,3,null);
+insert into CGRYREL values (12,2,11,null);
+insert into CGRYREL values (13,11,14,null);
+insert into CGRYREL values (14,11,15,null);
+insert into CGRYREL values (15,11,16,null);
+insert into CGRYREL values (16,2,13,null);
+insert into CGRYREL values (17,1,8,null);
+insert into CGRYREL values (18,8,9,null);
+insert into CGRYREL values (19,8,10,NULL);
+
+insert into CGPRREL values (1,9,2);
+insert into CGPRREL values (2,6,3);
+insert into CGPRREL values (3,9,4);
+insert into CGPRREL values (4,9,5);
+insert into CGPRREL values (5,9,6);
+insert into CGPRREL values (6,9,7);
+insert into CGPRREL values (7,9,8);
+
+insert into SETATTRIBUTE values (1,'Operating System');
+insert into SETATTRIBUTE values (2,'Screen Size (Inches)');
+insert into SETATTRIBUTE values (3,'Resolution (Pixels)');
+insert into SETATTRIBUTE values (4,'Storage');
+insert into SETATTRIBUTE values (5,'Processor Type');
+insert into SETATTRIBUTE values (6,'RAM');
+insert into SETATTRIBUTE values (7,'USB 3.0 Ports');
+
+insert into SETATTVALUE values (1,1,'Windows 10');
+insert into SETATTVALUE values (2,1,'OS X El Capitan');
+insert into SETATTVALUE values (3,2,'17.3');
+insert into SETATTVALUE values (4,2,'17.0');
+insert into SETATTVALUE values (5,2,'13.3');
+insert into SETATTVALUE values (6,2,'15.6');
+insert into SETATTVALUE values (7,2,'13.0');
+insert into SETATTVALUE values (8,3,'1440 x 900');
+insert into SETATTVALUE values (9,3,'1920 x 1080');
+insert into SETATTVALUE values (10,3,'1366 x 768');
+insert into SETATTVALUE values (11,4,'256GB SSD');
+insert into SETATTVALUE values (12,4,'2TB HDD + 128GB SSD');
+insert into SETATTVALUE values (13,4,'1TB HDD');
+insert into SETATTVALUE values (14,4,'128GB SSD');
+insert into SETATTVALUE values (15,5,'Intel Core i5');
+insert into SETATTVALUE values (16,5,'Intel Core i7');
+insert into SETATTVALUE values (17,5,'AMD A6');
+insert into SETATTVALUE values (18,6,'16.0 GB');
+insert into SETATTVALUE values (19,6,'8.0 GB');
+insert into SETATTVALUE values (20,6,'4.0 GB');
+insert into SETATTVALUE values (21,7,'2');
+insert into SETATTVALUE values (22,7,'1');
+insert into SETATTVALUE values (23,7,'3');
+insert into SETATTVALUE values (24,4,'1TB HDD + 256GB SSD');
+insert into SETATTVALUE values (25,4,'128GB Flash storage');
+
+--DELL XPS 13 attributes
+insert into PRODATTREL values (1,2,1); --OS
+insert into PRODATTREL values (2,2,5); --screen
+insert into PRODATTREL values (3,2,9); --resolution
+insert into PRODATTREL values (4,2,11); --storage
+insert into PRODATTREL values (5,2,16); --processor
+insert into PRODATTREL values (6,2,19); --RAM
+insert into PRODATTREL values (7,2,21); --USB 3.0 ports
+
+--Alienware 17 attributes
+insert into PRODATTREL values (8,4,1); --OS
+insert into PRODATTREL values (9,4,3); --screen
+insert into PRODATTREL values (10,4,9); --resolution
+insert into PRODATTREL values (11,4,24); --storage
+insert into PRODATTREL values (12,4,16); --processor
+insert into PRODATTREL values (13,4,18); --RAM
+insert into PRODATTREL values (14,4,21); --USB 3.0 ports
+
+--HP Spectre attributes
+insert into PRODATTREL values (15,5,1); --OS
+insert into PRODATTREL values (16,5,5); --screen
+insert into PRODATTREL values (17,5,9); --resolution
+insert into PRODATTREL values (18,5,11); --storage
+insert into PRODATTREL values (19,5,15); --processor
+insert into PRODATTREL values (20,5,19); --RAM
+
+--HP Omen 17
+insert into PRODATTREL values (21,6,1); --OS
+insert into PRODATTREL values (22,6,4); --screen
+insert into PRODATTREL values (23,6,9); --resolution
+insert into PRODATTREL values (24,6,12); --storage
+insert into PRODATTREL values (25,6,16); --processor
+insert into PRODATTREL values (26,6,18); --RAM
+insert into PRODATTREL values (27,6,21); --USB 3.0 ports
+
+--Lenovo IdeaPad 110
+insert into PRODATTREL values (28,7,1); --OS
+insert into PRODATTREL values (29,7,6); --screen
+insert into PRODATTREL values (30,7,10); --resolution
+insert into PRODATTREL values (31,7,13); --storage
+insert into PRODATTREL values (32,7,17); --processor
+insert into PRODATTREL values (33,7,19); --RAM
+insert into PRODATTREL values (34,7,22); --USB 3.0 ports
+
+--Apple MacBook Air 13
+insert into PRODATTREL values (35,8,2); --OS
+insert into PRODATTREL values (36,8,7); --screen
+insert into PRODATTREL values (37,8,8); --resolution
+insert into PRODATTREL values (38,8,25); --storage
+insert into PRODATTREL values (39,8,15); --processor
+insert into PRODATTREL values (40,8,19); --RAM
+insert into PRODATTREL values (41,8,21); --USB 3.0 ports
