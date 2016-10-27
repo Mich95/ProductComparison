@@ -86,6 +86,13 @@ insert into SETATTVALUE values (23,7,'3');
 insert into SETATTVALUE values (24,4,'1TB HDD + 256GB SSD');
 insert into SETATTVALUE values (25,4,'128GB Flash storage');
 
+insert into PRODPRICES values (1,2,1,2498.00);
+insert into PRODPRICES values (2,4,1,3198.00);
+insert into PRODPRICES values (3,5,1,2398.00);
+insert into PRODPRICES values (4,6,1,2598.00);
+insert into PRODPRICES values (5,7,1,498.00);
+insert into PRODPRICES values (6,8,1,1548.00);
+
 --DELL XPS 13 attributes
 insert into PRODATTREL values (1,2,1); --OS
 insert into PRODATTREL values (2,2,5); --screen
@@ -138,3 +145,4 @@ insert into PRODATTREL values (38,8,25); --storage
 insert into PRODATTREL values (39,8,15); --processor
 insert into PRODATTREL values (40,8,19); --RAM
 insert into PRODATTREL values (41,8,21); --USB 3.0 ports
+

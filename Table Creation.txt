@@ -8,6 +8,7 @@ DROP TABLE CgPrRel;
 DROP TABLE CgryRel;
 DROP TABLE Category;
 DROP TABLE Product;
+DROP TABLE ProdPrices;
 
 
 -- -----------------------------------------------------
@@ -74,6 +75,20 @@ CREATE INDEX fk_prod_id_idx ON ProdAttRel (ProdAttRel_prod_id ASC) ;
 
 CREATE INDEX fk_SetAttVal_idx ON ProdAttRel (ProdAttRel_SetAttVal_id ASC) ;
 
+-- -----------------------------------------------------
+-- Table ProdPrices
+-- -----------------------------------------------------
+CREATE  TABLE ProdPrices (
+  PrPr_id INT NOT NULL  ,
+  PrPr_Prod_id INT NOT NULL  ,
+  PrPr_ShopGrp_id INT NOT NULL  ,
+  PrPr_Price DECIMAL(10,2) NOT NULL  ,
+ 
+  PRIMARY KEY (PrPr_id) ,
+  CONSTRAINT fk_PrPr_Prod_id
+    FOREIGN KEY (PrPr_Prod_id )
+    REFERENCES Product (prod_id )
+  );
 
 
 -- -----------------------------------------------------
