@@ -1,4 +1,5 @@
 <HTML>
+<!-- TEST PAGE UNTIL WE CAN INTEGRATE WITH CATALOGUE MANAGEMENT GROUP-->
 <HEAD>
 <TITLE> Products checkboxes</TITLE>
 <strong><H3>Select 2 or more products to compare:</H3></strong>

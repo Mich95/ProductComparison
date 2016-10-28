@@ -1,0 +1,121 @@
+-- -----------------------------------------------------
+-- Dropping tables
+-- -----------------------------------------------------
+DROP TABLE ProdAttRel;
+DROP TABLE SetAttValue;
+DROP TABLE SetAttribute;
+DROP TABLE CgPrRel;
+DROP TABLE CgryRel;
+DROP TABLE Category;
+DROP TABLE ProdPrices;
+DROP TABLE Product;
+
+
+
+-- -----------------------------------------------------
+-- Table Product
+-- -----------------------------------------------------
+CREATE TABLE Product (
+  prod_id INT NOT NULL ,
+  prod_name VARCHAR(40) NOT NULL ,
+  prod_desc VARCHAR(128) DEFAULT NULL ,
+  prod_img_url VARCHAR(128) DEFAULT NULL ,
+  prod_long_desc VARCHAR(256) DEFAULT NULL ,
+  prod_sku CHAR(16) DEFAULT NULL ,
+  prod_disp_cmd VARCHAR(128) DEFAULT NULL ,
+  PRIMARY KEY (prod_id) 
+  );
+
+CREATE INDEX prod_name ON Product (prod_name ASC) ;
+
+
+-- -----------------------------------------------------
+-- Table Attribute
+-- -----------------------------------------------------
+create table ATTRIBUTE
+(
+   ID                   INT NOT NULL ,
+   PRODUCT_PROD_ID      INT NOT NULL,
+   NAME                 varchar(45),
+   primary key (ID)
+);
+
+-- -----------------------------------------------------
+-- Table AttributeValue
+-- -----------------------------------------------------
+create table ATTRIBUTEVALUE
+(
+   ATTRVAL_ID           INT NOT NULL ,
+   ATTRVAL_PROD_ID      INT NOT NULL,
+   ATTRVAL_ATTR_ID      INT NOT NULL,
+   ATTRVAL_VALUE        varchar(45) not null,
+   ATTRVAL_PRICE        decimal(10,2),
+   primary key (ATTRVAL_ID)
+);
+
+-- -----------------------------------------------------
+-- Table ProdPrices
+-- -----------------------------------------------------
+CREATE  TABLE ProdPrices (
+  PrPr_id INT NOT NULL ,
+  PrPr_Prod_id INT NOT NULL  ,
+  PrPr_ShopGrp_id INT NOT NULL  ,
+  PrPr_Price DECIMAL(10,2) NOT NULL  ,
+ 
+  PRIMARY KEY (PrPr_id) ,
+  CONSTRAINT fk_PrPr_Prod_id
+    FOREIGN KEY (PrPr_Prod_id )
+    REFERENCES Product (prod_id )
+  );
+
+
+-- -----------------------------------------------------
+-- Table Category
+-- -----------------------------------------------------
+create table category (
+  cat_id INT NOT NULL ,
+  cat_name VARCHAR(40) NOT NULL ,
+  cat_desc VARCHAR(128) DEFAULT NULL ,
+  cat_img_url VARCHAR(128) DEFAULT NULL ,
+  CAT_DISP_CMD varchar(128) default null ,
+  primary key (CAT_ID) ) ;
+
+CREATE INDEX cat_name ON Category (cat_name ASC) ;
+
+-- -----------------------------------------------------
+-- Table CgPrRel
+-- -----------------------------------------------------
+CREATE  TABLE CgPrRel (
+  Id INT NOT NULL ,
+  CgPr_cat_id INT NOT NULL ,
+  CgPr_prod_id INT NOT NULL ,
+  PRIMARY KEY (Id) ,
+  CONSTRAINT pk_parent_cat
+    FOREIGN KEY (CgPr_cat_id )
+    REFERENCES Category (CAT_ID ),
+  CONSTRAINT pk_child_prod
+    FOREIGN KEY (CgPr_prod_id )
+    REFERENCES Product (PROD_ID ) ) ;
+
+CREATE INDEX pk_parent_cat_idx ON CgPrRel (CgPr_cat_id ASC) ;
+
+CREATE INDEX pk_child_prod_idx ON CgPrRel (CgPr_prod_id ASC) ;
+
+
+-- -----------------------------------------------------
+-- Table CgryRel
+-- -----------------------------------------------------
+CREATE TABLE CgryRel (
+  Id INT NOT NULL ,
+  cgryrel_id_parent INT NOT NULL ,
+  cgryrel_id_child INT NOT NULL ,
+  cgryrel_sequence INT NULL ,
+  PRIMARY KEY (Id) ,
+  CONSTRAINT fk_parent_cat
+    FOREIGN KEY (cgryrel_id_parent )
+    REFERENCES Category (cat_id ),
+  CONSTRAINT fk_child_cat
+    foreign key (CGRYREL_ID_CHILD )
+    REFERENCES Category (cat_id ) ) ;
+
+CREATE INDEX pk_cc_parent_cat_idx ON CgryRel (cgryrel_id_parent ASC) ;CREATE INDEX pk_cc_child_cat_idx ON CgryRel (cgryrel_id_child ASC) ;
