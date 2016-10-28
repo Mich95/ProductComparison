@@ -4,7 +4,7 @@
 <TITLE> Products checkboxes</TITLE>
 <strong><H3>Select 2 or more products to compare:</H3></strong>
 <br>
-<FORM METHOD="post" ACTION="ProductAttributes.php">
+<FORM METHOD="post" ACTION="ProductComparison.php">
     Dell XPS 13 <input type="checkbox" name="DELLXPS13" value=2 /></br>
 	Alienware 17 <input type="checkbox" name="ALIENWARE17" value=4 /></br>
 	HP Spectre <input type="checkbox" name="HPSPECTRE13" value=5 /></br>

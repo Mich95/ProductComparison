@@ -52,14 +52,6 @@ insert into CGPRREL values (5,9,6);
 insert into CGPRREL values (6,9,7);
 insert into CGPRREL values (7,9,8);
 
-insert into SETATTRIBUTE values (1,'Operating System');
-insert into SETATTRIBUTE values (2,'Screen Size (Inches)');
-insert into SETATTRIBUTE values (3,'Resolution (Pixels)');
-insert into SETATTRIBUTE values (4,'Storage');
-insert into SETATTRIBUTE values (5,'Processor Type');
-insert into SETATTRIBUTE values (6,'RAM');
-insert into SETATTRIBUTE values (7,'USB 3.0 Ports');
-
 insert into PRODPRICES values (1,2,1,2498.00);
 insert into PRODPRICES values (2,4,1,3198.00);
 insert into PRODPRICES values (3,5,1,2398.00);
@@ -167,7 +159,7 @@ insert into ATTRIBUTEVALUE values (33, 7, 33, '4GB', 0.00); --RAM
 insert into ATTRIBUTEVALUE values (34, 7, 34, '2', 0.00); --USB 3.0 Ports
 
 --MACBOOK AIR 13
-insert into ATTRIBUTEVALUE values (35, 8, 35, 'Windows 10', 0.00); --OS
+insert into ATTRIBUTEVALUE values (35, 8, 35, 'OS X El Capitan', 0.00); --OS
 insert into ATTRIBUTEVALUE values (36, 8, 36, '13.0', 0.00); --Screen
 insert into ATTRIBUTEVALUE values (37, 8, 37, '1440 x 900', 0.00); --Res
 insert into ATTRIBUTEVALUE values (38, 8, 38, '128GB Flash storage', 0.00); --Storage
