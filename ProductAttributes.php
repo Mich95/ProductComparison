@@ -9,16 +9,31 @@
 <!-- Variables are returned as $_GET["varname"] or $_POST["varname"] -->
 <!-- Displaying the time at the server is useful to show the page was generated and not loaded from cache -->
 <p>Local time is <?php echo  date("l dS o F Y h:i:s A")?><BR>
-<!--  Notice that the "<?= expression ?>" nugget to print an expression in the middle of HTML -->
-<!--  won't work on all versions or installs of PHP and you may have to -->
-<!--  use "<?php echo expression ?>" instead -->
 
 <?php
-
-	// First, include the common database access functions, if they're not already included
+	#need to select products to compare first
+	if(!$_POST || sizeof($_POST)==1){
+      header("location:ProductsTest.php");
+	}
+	
+	# First, include the common database access functions, if they're not already included
 	require_once "./common_db.php";
 	# Get a PDO database connection - see http://www.php.net/manual/en/book.pdo.php
 	$dbo = db_connect();
+
+	$prodIDs = array();
+	$headers = array();
+	$prices = array();
+	
+	#debugging - checking values of POST array
+	print_r($_POST);
+	
+	# fill arrays using productIDs passed from checkboxes on Products page
+	foreach ($_POST as $itemID){
+			$prodIDs[] = $itemID;
+			$headers[] = get_name($itemID);
+			$prices[] = get_price($itemID);
+	};
 
 	# Construct an SQL query as multiple lines for readability
 	$query = "SELECT DISTINCT SETATT_ID, SETATT_NAME";
@@ -26,7 +41,7 @@
 	$query .= " FROM PRODATTREL, SETATTVALUE, SETATTRIBUTE";
 	# ID of product
 	# 5 AND 7 NEED TO BE CHANGED TO PRODUCTS THAT USER SELECTED
-	$query .= " WHERE PRODATTREL_PROD_ID IN ('5','7')";
+	$query .= " WHERE PRODATTREL_PROD_ID IN ('".$prodIDs[0]."','".$prodIDs[1]."')";
 	# Joining ProdAttRel table & SetAttValue table
 	$query .= " AND PRODATTREL_SETATTVAL_ID = SETATTVALUE.SETATTVAL_ID";
 	# Joining SetAttribute table & SetAttValue table
@@ -34,9 +49,6 @@
 	# Order by ID
 	$query .= " ORDER BY SETATT_ID";
 		
-    
-    # Display the constructed query
-    echo "<p>" . $query . "</p>";
 
 	# Run the query, returning a PDOStatement object - see http://www.php.net/manual/en/class.pdostatement.php
 	# Notice, this statement will throw a PDOException object if any problems - see http://www.php.net/manual/en/class.pdoexception.php
@@ -50,8 +62,6 @@
 		die ("Invalid query");
 	}
 	
-	
-	
 	#function to get name of a product
 	function get_name($prod_id){
 		global $dbo;
@@ -63,13 +73,9 @@
 		# ID of product
 		$query1 .= " WHERE PROD_ID = '".$prod_id."'";
 
-		# Run the query, returning a PDOStatement object - see http://www.php.net/manual/en/class.pdostatement.php
-		# Notice, this statement will throw a PDOException object if any problems - see http://www.php.net/manual/en/class.pdoexception.php
 		try {
 			$statement1 = $dbo->query($query1);
 		}
-		# Provide the exception handler - in this case, just print an error message and die,
-		# but see the provided default exception handler in common_db.php, which logs to the Apache error log
 		catch (PDOException $ex) {
 			echo $ex->getMessage();
 			die ("Invalid query");
@@ -91,13 +97,9 @@
 		# ID of product
 		$query1 .= " WHERE PRPR_PROD_ID = '".$prod_id."'";
 
-		# Run the query, returning a PDOStatement object - see http://www.php.net/manual/en/class.pdostatement.php
-		# Notice, this statement will throw a PDOException object if any problems - see http://www.php.net/manual/en/class.pdoexception.php
 		try {
 			$statement1 = $dbo->query($query1);
 		}
-		# Provide the exception handler - in this case, just print an error message and die,
-		# but see the provided default exception handler in common_db.php, which logs to the Apache error log
 		catch (PDOException $ex) {
 			echo $ex->getMessage();
 			die ("Invalid query");
@@ -124,13 +126,10 @@
 		# Joining SetAttribute table & SetAttValue table
 		$query1 .= " AND SETATTVAL_SETATT_ID = SETATTRIBUTE.SETATT_ID";
 
-		# Run the query, returning a PDOStatement object - see http://www.php.net/manual/en/class.pdostatement.php
-		# Notice, this statement will throw a PDOException object if any problems - see http://www.php.net/manual/en/class.pdoexception.php
 		try {
 			$statement1 = $dbo->query($query1);
 		}
-		# Provide the exception handler - in this case, just print an error message and die,
-		# but see the provided default exception handler in common_db.php, which logs to the Apache error log
+
 		catch (PDOException $ex) {
 			echo $ex->getMessage();
 			die ("Invalid query");
@@ -139,11 +138,9 @@
 		$row1 = $statement1->fetch();
 		return $row1[0];
 	}
-	
-	$headers = array(get_name(5),get_name(7));
-	$prices = array(get_price(5),get_price(7));
+
 ?>
-<!-- Mixed-up HTML and embedded bits of PHP from here on; read the tags carefully -->
+
 <!-- Print the table headers, with 2px borders around cells so you can see the structure -->
 <strong><H3>Product Comparison</H3></strong>
 <br>
@@ -174,35 +171,32 @@
 	# fetch() returns an array (by default, both indexed and name-associated) of result values for the row
     while($row = $statement->fetch()) { ?> <!-- see http://www.php.net/manual/en/pdostatement.fetch.php -->
 		<TR>
-			<?php				
+			<?php		
+				#attribute for the row
+				#e.g. 'operating system'
 				$attribute_name = $row[1];
-				# 5 AND 7 NEED TO BE CHANGED TO PRODUCTS THAT USER SELECTED
-				$val1 = get_value($attribute_name,5);
-				$val2 = get_value($attribute_name,7);
 			?>
 			
-			<!-- Fill cells with Attribute name, product1 value, product2 value -->
-		    <TD><?php echo $row[1]?></TD>			
-			<TD>
-				<?php 
-				# check product has attribute, otherwise indicate it does not
-				if($val1!=""){
-					echo $val1;
-				} else {
-					echo "----";
-				};
-				?>
-			</TD>
-			<TD>
-				<?php 
-				# check product has attribute, otherwise indicate it does not
-				if($val2!=""){
-					echo $val2;
-				} else {
-					echo "----";
-				};
-				?>
-			</TD>
+			<!-- Fill cells with Attribute name, product1 value, product2 value etc.-->
+			<!-- static - will always be this column -->
+		    <TD><?php echo $attribute_name?></TD>	
+			
+			<!-- Loop through productIDs to get values for each column-->
+			<?php for($j=0; $j < sizeof($prices); $j++) { ?> 
+				<TD>
+					<?php 
+					# get value of an attribute for each product being compared e.g. operating system of each product
+					$val = get_value($attribute_name,$prodIDs[$j]);
+					
+					# check product has attribute, otherwise indicate it does not
+					if($val!=""){
+						echo $val;
+					} else {
+						echo "----";
+					};
+					?>
+				</TD>
+			<?php	} ?>
 			
 		</TR>
 <?php	}
