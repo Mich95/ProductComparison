@@ -1,23 +1,39 @@
-<HTML>
-<HEAD>
-<TITLE> Comparison - Test view attributes page</TITLE>
-<!-- // Load any stylesheets here
-<LINK rel="stylesheet" type="text/css" HREF="./books.css">
--->
-</HEAD>
-<BODY>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>COMP 344</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/shop-homepage.css" rel="stylesheet">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    
+    
+
+</head>
+
+<body>
 
 <?php
+	include 'Functions.php';
+	
 	#need to select products to compare first
 	if(!$_POST || sizeof($_POST)==1){
       header("location:catalogue.php");
 	}
 	
-	# Include the common database access functions
-	require_once "./common_db.php";
-	
-	# Get a PDO database connection
-	$dbo = db_connect();
+	$categories = get_catnames();
 
 	$prodIDs = array();
 	$headers = array();
@@ -50,103 +66,68 @@
 		echo $ex->getMessage();
 		die ("Invalid query");
 	}
-	
-	#function to get name of a product
-	function get_name($prod_id){
-		global $dbo;
-		
-		# Construct an SQL query as multiple lines for readability
-		$query = "SELECT PROD_NAME";
-		$query .= " FROM PRODUCT";
-		$query .= " WHERE PROD_ID = '".$prod_id."'";
-
-		try {
-			$statement1 = $dbo->query($query);
-		}
-		catch (PDOException $ex) {
-			echo $ex->getMessage();
-			die ("Invalid query");
-		}
-		
-		$row1 = $statement1->fetch();
-		return $row1[0];
-	}
-	
-	
-	#function to get price for a product
-	function get_price($prod_id){
-		global $dbo;
-		
-		# Construct an SQL query as multiple lines for readability
-		$query = "SELECT PRPR_PRICE";
-		$query .= " FROM PRODPRICES";
-		$query .= " WHERE PRPR_PROD_ID = '".$prod_id."'";
-
-		try {
-			$statement1 = $dbo->query($query);
-		}
-		catch (PDOException $ex) {
-			echo $ex->getMessage();
-			die ("Invalid query");
-		}
-		
-		$row1 = $statement1->fetch();
-		return $row1[0];
-	}
-	
-	#function to get img of a product
-	function get_img($prod_id){
-		global $dbo;
-		
-		# Construct an SQL query as multiple lines for readability
-		$query = "SELECT PROD_IMG_URL";
-		$query .= " FROM PRODUCT";
-		$query .= " WHERE PROD_ID = '".$prod_id."'";
-
-		try {
-			$statement1 = $dbo->query($query);
-		}
-		catch (PDOException $ex) {
-			echo $ex->getMessage();
-			die ("Invalid query");
-		}
-		
-		$row1 = $statement1->fetch();
-		return $row1[0];
-	}
-	
-	#function to get attribute values for a product
-	function get_value($attname,$prod_id){
-		global $dbo;
-		
-		# Construct an SQL query as multiple lines for readability
-		$query = "SELECT ATTRVAL_VALUE";
-		$query .= " FROM ATTRIBUTE, ATTRIBUTEVALUE";
-		$query .= " WHERE ID = ATTRVAL_ATTR_ID";
-		$query .= " AND ATTRIBUTE.PRODUCT_PROD_ID = '".$prod_id."'";
-		$query .= " AND NAME = '".$attname."'";
-
-		try {
-			$statement1 = $dbo->query($query);
-		}
-
-		catch (PDOException $ex) {
-			echo $ex->getMessage();
-			die ("Invalid query");
-		}
-		
-		$row1 = $statement1->fetch();
-		return $row1[0];
-	}
-
 ?>
 
+    <!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">COMP344</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="#">About</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
 
-<strong><H3>Product Comparison</H3></strong>
-<br>
+    <!-- Page Content -->
+    <div class="container">
 
+        <div class="row">
+
+            <div class="col-md-2">
+                <p class="lead">Comparision</p>
+                
+                
+                
+                <div class="list-group">
+					<?php for($j=0; $j < sizeof($categories); $j++) { ?> 
+						<a href="#" class="list-group-item"><?php echo $categories[$j] ?></a>
+					<?php	} ?>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+             <p><button type="button" class="btn btn-success">Products</button></p>
+                
+
+                <div class="row">
+                
+
+                    
 <!-- Print the table headers, with 2px borders around cells so you can see the structure -->
-<TABLE BORDER=2>
+<TABLE class="table table-hover">
+	<thead>
 	<!-- First row -->
 	<TR>
 		<!-- Print 'attributes' in first column-->
@@ -157,7 +138,9 @@
 			<TH><?php echo $headers[$j] ?></TH>
 		<?php	} ?>
 	</TR>
+	</thead>
 	
+	<tbody>
 	<!-- Second row -->
 	<TR>
 		<!-- Print 'image' under attribute-->
@@ -214,6 +197,7 @@
 			<?php	} ?>
 			
 		</TR>
+		</tbody>
 <?php	}
 
 	# Drop the reference to the database
@@ -221,5 +205,44 @@
 ?>
 </TABLE>
 
-</BODY>
-</HTML>
+
+                    
+                        
+
+
+                    
+                   
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <div class="container">
+
+        <hr>
+
+        <!-- Footer -->
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; COMP344 Assignment 2</p>
+                </div>
+            </div>
+        </footer>
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+</body>
+
+</html>
