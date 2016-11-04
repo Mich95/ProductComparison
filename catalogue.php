@@ -18,8 +18,8 @@
     <link href="css/shop-homepage.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    
-    
+
+
 
 </head>
 
@@ -27,32 +27,32 @@
 
 <?php
 	include 'Functions.php';
-	
-	
+
+
 	if (!$_POST){
 		$category = 9;
 	} else {
 		$category = $_POST["catID"];
 	}
-	
+
 	$catIDs = get_catIDs();
-	
+
 	$categories = array();
-	
-	
-	for($j=0; $j < sizeof($catIDs); $j++) {	
+
+
+	for($j=0; $j < sizeof($catIDs); $j++) {
 			$categories[] = get_catname($catIDs[$j]);
 	};
-	
+
 	#needs to be changed to be dynamic
 	$prodIDs = get_IDs($category);
-	
+
 	$headers = array();
 	$prices = array();
 	$images = array();
 	$descs = array();
 	$SKUs = array();
-	
+
 	# fill arrays using productIDs passed from checkboxes on Products page
 	foreach ($prodIDs as $itemID){
 			$headers[] = get_name($itemID);
@@ -61,7 +61,7 @@
 			$descs[] = get_desc($itemID);
 			$SKUs[] = get_SKU($itemID);
 	};
-	
+
 ?>
 
     <!-- Navigation -->
@@ -104,26 +104,26 @@
             <div class="col-md-2">
                 <p class="lead">Products</p>
                 <div class="list-group">
-					<?php for($j=0; $j < sizeof($categories); $j++) { ?> 
+					<?php for($j=0; $j < sizeof($categories); $j++) { ?>
 						<form method="post" action="catalogue.php" id="form1">
 							<input type="hidden" name="catID" value=<?php echo $catIDs[$j] ?> />
-							<input type="submit" value="<?php echo $categories[$j] ?>"></button>
+							<input type="submit" class"toggle" value="<?php echo $categories[$j] ?>"></button>
 							</form>
 					<?php	} ?>
                 </div>
             </div>
 
             <div class="col-md-9">
-				
 
-				
+
+
 				<FORM METHOD="post" onsubmit="checkboxes()" ACTION="ProductComparison.php">
-				
+
 				<p><button type="submit" class="btn btn-success">Compare</button>  Select up to three products to compare!</p>
                 <div class="row carousel-holder"></div>
-				
+
                 <div class="row">
-					<?php for($j=0; $j < sizeof($prodIDs); $j++) { ?> 
+					<?php for($j=0; $j < sizeof($prodIDs); $j++) { ?>
 						<div class="col-sm-4 col-lg-4 col-md-4">
 							<div class="thumbnail">
 								<img src="img\<?php echo $images[$j]?>">
@@ -145,7 +145,7 @@
 								</div>
 							</div>
 						</div>
-					<?php	} ?>    
+					<?php	} ?>
                 </div>
 				</FORM>
             </div>
@@ -176,7 +176,7 @@
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
-	
+
 	<script type="text/javascript">
 		//from http://stackoverflow.com/questions/19001844/how-to-limit-the-number-of-selected-checkboxes
 		var limit = 3;
@@ -188,8 +188,8 @@
 			   this.checked = false;
 			   alert("You can only compare up to three products!");
 		   };
-		});	 
-		
+		});
+
 		//from http://stackoverflow.com/questions/22938341/count-the-number-of-checked-checkboxes-in-html
 		function checkboxes(){
 			//count the number of products selected
@@ -199,6 +199,9 @@
 				alert("Please select more than one product to compare!")
 			}
 		};
+    $('.toggle').click(function() {
+      $(this).toggleClass('active');
+    });
 	</script>
 
 </body>
