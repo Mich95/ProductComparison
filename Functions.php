@@ -34,7 +34,34 @@
 		return $IDs;
 	}
 	
-	#function to get prodIDs in a category
+	#function to get category names
+	function get_catnames(){
+		global $dbo;
+		
+		# Construct an SQL query as multiple lines for readability
+		$query = "SELECT CAT_NAME";
+		$query .= " FROM CATEGORY";
+
+		try {
+			$statement = $dbo->query($query);
+		}
+		catch (PDOException $ex) {
+			echo $ex->getMessage();
+			die ("Invalid query");
+		}
+		
+		$cats = array();
+		
+		while($row = $statement->fetch()) {
+			for($j=0; $j < $statement->columnCount(); $j++) {			
+				$cats[] = $row[$j];
+			}
+		}
+		
+		return $cats;
+	}
+	
+	#function to get category names
 	function get_catname($cat_id){
 		global $dbo;
 		
@@ -55,7 +82,7 @@
 		return $row[0];
 	}
 	
-	#function to get prodIDs in a category
+	#function to get category IDs
 	function get_catIDs(){
 		global $dbo;
 		
@@ -124,7 +151,7 @@
 		return $row1[0];
 	}
 	
-	#function to get price for a product
+	#function to get SKU for a product
 	function get_SKU($prod_id){
 		global $dbo;
 		

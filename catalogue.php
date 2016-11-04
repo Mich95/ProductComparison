@@ -17,10 +17,6 @@
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-
-
-
 </head>
 
 <body>
@@ -28,32 +24,33 @@
 <?php
 	include 'Functions.php';
 
-
+	# get current category page (default is set to the laptop page)
 	if (!$_POST){
 		$category = 9;
 	} else {
 		$category = $_POST["catID"];
 	}
-
+	
+	# create arrays of category IDs and names
 	$catIDs = get_catIDs();
-
 	$categories = array();
 
-
+	# fill category name array
 	for($j=0; $j < sizeof($catIDs); $j++) {
 			$categories[] = get_catname($catIDs[$j]);
 	};
-
-	#needs to be changed to be dynamic
+	
+	# get products in a catgory
 	$prodIDs = get_IDs($category);
-
+	
+	# create arrays
 	$headers = array();
 	$prices = array();
 	$images = array();
 	$descs = array();
 	$SKUs = array();
 
-	# fill arrays using productIDs passed from checkboxes on Products page
+	# fill arrays to display products
 	foreach ($prodIDs as $itemID){
 			$headers[] = get_name($itemID);
 			$prices[] = get_price($itemID);
@@ -102,39 +99,64 @@
         <div class="row">
 
             <div class="col-md-2">
-                <p class="lead">Products</p>
+                <p class="lead"><strong>Products</strong></p>
+				
+				<!-- Categories menu -->
                 <div class="list-group">
-					<?php for($j=0; $j < sizeof($categories); $j++) { ?>
+					<?php for($j=0; $j < sizeof($categories); $j++) { 
+						if ($category != $catIDs[$j]){
+					?>				
+						<!-- non-active categories -->
 						<form method="post" action="catalogue.php" id="form1">
 							<input type="hidden" name="catID" value=<?php echo $catIDs[$j] ?> />
-							<input type="submit" class"toggle" value="<?php echo $categories[$j] ?>"></button>
-							</form>
+							<input type="submit" value="<?php echo $categories[$j] ?>"></button>
+						</form>
+						
+					<?php	} else { ?>
+					
+						<!-- active category -->
+						<form method="post" action="catalogue.php" id="form1">
+							<input type="hidden" name="catID" value=<?php echo $catIDs[$j] ?> />
+							<input type="submit" id="active" value="<?php echo $categories[$j] ?>"></button>
+						</form>
 					<?php	} ?>
+				<?php	} ?>
                 </div>
+				
             </div>
 
             <div class="col-md-9">
-
-
-
+				
+				<!-- products displayed in a form that can be submitted -->
 				<FORM METHOD="post" onsubmit="checkboxes()" ACTION="ProductComparison.php">
-
+				
+				<!-- compare button to submit form -->
 				<p><button type="submit" class="btn btn-success">Compare</button>  Select up to three products to compare!</p>
-                <div class="row carousel-holder"></div>
+   
 
-                <div class="row">
+                <div class="row carousel-holder">
 					<?php for($j=0; $j < sizeof($prodIDs); $j++) { ?>
 						<div class="col-sm-4 col-lg-4 col-md-4">
 							<div class="thumbnail">
+							
+								<!-- product image -->
 								<img src="img\<?php echo $images[$j]?>">
 								<div class="caption">
+								
+									<!-- product price -->
 									<h4 class="pull-right">$<?php echo $prices[$j] ?></h4>
-									<h4><a href="#"><?php echo $headers[$j] ?></a>
-									</h4>
+									
+									<!-- product name -->
+									<h4><a href="#"><?php echo $headers[$j] ?></a></h4>
+									
+									<!-- product description -->
 									<p><?php echo $descs[$j] ?></p>
 								</div>
 								<div class="ratings">
+									<!-- check boxe to compare -->
 									<p class="pull-right"><input type="checkbox" name=<?php echo $SKUs[$j] ?> value=<?php echo $prodIDs[$j] ?> />    Compare</p>
+									
+									<!-- rating stars -->
 									<p>
 										<span class="glyphicon glyphicon-star"></span>
 										<span class="glyphicon glyphicon-star"></span>
@@ -197,11 +219,9 @@
 			//if 0 or 1, ask user to select at least one more
 			if (checkedboxes < 2){
 				alert("Please select more than one product to compare!")
-			}
+			} 
 		};
-    $('.toggle').click(function() {
-      $(this).toggleClass('active');
-    });
+
 	</script>
 
 </body>
