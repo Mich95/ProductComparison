@@ -1,9 +1,9 @@
 -- -----------------------------------------------------
 -- Dropping tables
 -- -----------------------------------------------------
-DROP TABLE ProdAttRel;
-DROP TABLE SetAttValue;
-DROP TABLE SetAttribute;
+
+DROP TABLE Attribute;
+DROP TABLE AttributeValue;
 DROP TABLE CgPrRel;
 DROP TABLE CgryRel;
 DROP TABLE Category;

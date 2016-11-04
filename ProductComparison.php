@@ -15,11 +15,7 @@
     <link href="css/bootstrap.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/shop-homepage.css" rel="stylesheet">
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    
-    
+    <link href="css/shop-homepage.css" rel="stylesheet"> 
 
 </head>
 
@@ -33,8 +29,16 @@
       header("location:catalogue.php");
 	}
 	
-	$categories = get_catnames();
+	# create arrays of category IDs and names
+	$catIDs = get_catIDs();
+	$categories = array();
 
+	# fill category name array
+	for($j=0; $j < sizeof($catIDs); $j++) {
+			$categories[] = get_catname($catIDs[$j]);
+	};
+	
+	# create arrays
 	$prodIDs = array();
 	$headers = array();
 	$prices = array();
@@ -48,7 +52,7 @@
 			$images[] = get_img($itemID);
 	};
 
-	# Construct an SQL query as multiple lines for readability
+	# Get attributes
 	$query = "SELECT DISTINCT NAME";
 	$query .= " FROM ATTRIBUTE";
 	$query .= " WHERE PRODUCT_PROD_ID IN ('".$prodIDs[0]."','".$prodIDs[1]."')";
@@ -106,112 +110,104 @@
         <div class="row">
 
             <div class="col-md-2">
-                <p class="lead">Comparision</p>
-                
-                
-                
+                <p class="lead">Comparison</p>
+                              
+				<!-- Categories menu -->
                 <div class="list-group">
-					<?php for($j=0; $j < sizeof($categories); $j++) { ?> 
-						<a href="#" class="list-group-item"><?php echo $categories[$j] ?></a>
+					<?php for($j=0; $j < sizeof($categories); $j++) { ?>
+						<form method="post" action="catalogue.php" id="form1">
+							<input type="hidden" name="catID" value=<?php echo $catIDs[$j] ?> />
+							<input type="submit" value="<?php echo $categories[$j] ?>"></button>
+						</form>
 					<?php	} ?>
                 </div>
             </div>
 
             <div class="col-md-9">
-             <p><button type="button" class="btn btn-success">Products</button></p>
+             <p><button type="button" class="btn btn-success" onclick="location.href = 'catalogue.php';">Products</button></p>
                 
-
                 <div class="row">
-                
-
-                    
-<!-- Print the table headers, with 2px borders around cells so you can see the structure -->
-<TABLE class="table table-hover">
-	<thead>
-	<!-- First row -->
-	<TR>
-		<!-- Print 'attributes' in first column-->
-		<TH>Attributes</TH>
-		
-		<!-- Print names of products being compared -->
-		<?php for($j=0; $j < sizeof($headers); $j++) { ?> 
-			<TH><?php echo $headers[$j] ?></TH>
-		<?php	} ?>
-	</TR>
-	</thead>
-	
-	<tbody>
-	<!-- Second row -->
-	<TR>
-		<!-- Print 'image' under attribute-->
-		<TH>Image</TH>
-		
-		<!-- Display images -->
-		<?php for($j=0; $j < sizeof($images); $j++) { ?> 
-			<TH><img src="img\<?php echo $images[$j]?>"></TH>
-		<?php	} ?>
-	</TR>
-	
-	<!-- Third row -->
-	<TR>
-		<!-- Print 'price' under attribute-->
-		<TH>Price</TH>
-		
-		<!-- Print prices -->
-		<?php for($j=0; $j < sizeof($prices); $j++) { ?> 
-			<TH>$<?php echo $prices[$j]?></TH>
-		<?php	} ?>
-	</TR>
-   
-   
-<?php
-	# Print the rest of the table
-	# fetch() returns an array (by default, both indexed and name-associated) of result values for the row
-    while($row = $statement->fetch()) { ?>
-		<TR>
-			<?php		
-				#attribute for the row
-				#e.g. 'operating system'
-				$attribute_name = $row[0];
-			?>
-			
-			<!-- Fill cells with Attribute name, product1 value, product2 value etc.-->
-			<!-- static - will always be this column -->
-		    <TD><?php echo $attribute_name?></TD>	
-			
-			<!-- Loop through productIDs to get values for the other columns-->
-			<?php for($j=0; $j < sizeof($prodIDs); $j++) { ?> 
-				<TD>
-					<?php 
-					# get value of an attribute for each product being compared e.g. operating system of each product
-					$val = get_value($attribute_name,$prodIDs[$j]);
+                                   
+				<!-- Print the table headers, with 2px borders around cells so you can see the structure -->
+				<TABLE class="table table-hover">
+					<thead>
+					<!-- First row -->
+					<TR>
+						<!-- Print 'attributes' in first column-->
+						<TH>Attributes</TH>
+						
+						<!-- Print names of products being compared -->
+						<?php for($j=0; $j < sizeof($headers); $j++) { ?> 
+							<TH><?php echo $headers[$j] ?></TH>
+						<?php	} ?>
+					</TR>
+					</thead>
 					
-					# check product has attribute, otherwise indicate it does not
-					if($val!=""){
-						echo $val;
-					} else {
-						echo "----";
-					};
-					?>
-				</TD>
-			<?php	} ?>
-			
-		</TR>
-		</tbody>
-<?php	}
+					<tbody>
+					<!-- Second row -->
+					<TR>
+						<!-- Print 'image' under attribute-->
+						<TH>Image</TH>
+						
+						<!-- Display images -->
+						<?php for($j=0; $j < sizeof($images); $j++) { ?> 
+							<TH><img src="img\<?php echo $images[$j]?>"></TH>
+						<?php	} ?>
+					</TR>
+					
+					<!-- Third row -->
+					<TR>
+						<!-- Print 'price' under attribute-->
+						<TH>Price</TH>
+						
+						<!-- Print prices -->
+						<?php for($j=0; $j < sizeof($prices); $j++) { ?> 
+							<TH>$<?php echo $prices[$j]?></TH>
+						<?php	} ?>
+					</TR>
+				   
+				   
+				<?php
+					# Print the rest of the table
+					# fetch() returns an array (by default, both indexed and name-associated) of result values for the row
+					while($row = $statement->fetch()) { ?>
+						<TR>
+							<?php		
+								#attribute for the row
+								#e.g. 'operating system'
+								$attribute_name = $row[0];
+							?>
+							
+							<!-- Fill cells with Attribute name, product1 value, product2 value etc.-->
+							<!-- static - will always be this column -->
+							<TD><?php echo $attribute_name?></TD>	
+							
+							<!-- Loop through productIDs to get values for the other columns-->
+							<?php for($j=0; $j < sizeof($prodIDs); $j++) { ?> 
+								<TD>
+									<?php 
+									# get value of an attribute for each product being compared e.g. operating system of each product
+									$val = get_value($attribute_name,$prodIDs[$j]);
+									
+									# check product has attribute, otherwise indicate it does not
+									if($val!=""){
+										echo $val;
+									} else {
+										echo "----";
+									};
+									?>
+								</TD>
+							<?php	} ?>
+							
+						</TR>
+						</tbody>
+				<?php	}
 
-	# Drop the reference to the database
-	$dbo = null;
-?>
-</TABLE>
-
-
-                    
-                        
-
-
-                    
-                   
+					# Drop the reference to the database
+					$dbo = null;
+				?>
+				</TABLE>
+                                                                            
                 </div>
 
             </div>

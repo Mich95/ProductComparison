@@ -24,6 +24,13 @@ insert into PRODUCT values (6,'HP Omen 17','HP Omen 17-W007TX 17" Laptop','HP_Om
 insert into PRODUCT values (7,'Lenovo IdeaPad 110','Lenovo IdeaPad 110 15.6" Laptop (AMD A6)','Lenovo_IP_110.png','Get the features you need without the big price tag from this value-priced laptop: dependable processing power, good memory, lots of storage, an attractive display, and integrated graphics.','LENOVOIP110','DisplayProduct.php');
 insert into PRODUCT values (8,'Apple MacBook Air 13','Apple MacBook Air 13" 128GB Laptop','MacBook_Air_13.png','Features up to 8GB of memory, a fifth-generation Intel Core processor, Thunderbolt 2, great built-in apps and all-day battery life.','MBAIR13','DisplayProduct.php');
 
+insert into PRODUCT values (9,'HP Pavilion Touch','HP Pavilion Touchscreen All-in-One Desktop PC','HP_Pavilion.png','This computer has an Intel Core i7-6700T (8M cache, up to 3.60 Ghz), 16GB RAM and Nvidia GeForce GT930a 2GB DDR5 Graphics.','HPPAVILION','DisplayProduct.php');
+insert into PRODUCT values (10,'Lenovo Ideacentre','Lenovo Ideacentre 23.8" All-in-One Touchscreen PC','Lenovo_Ideacentre.png','The super slim Lenovo Ideacentre AIO 510s is a power packed All in One PC with Intel® Core™ i7-6500U Processor, 23.8" Full HD, Touchscreen Display and a NVIDIA GT930A 2GB Discrete Graphics.','LENIDEACENTRE','DisplayProduct.php');
+insert into PRODUCT values (11,'Apple iMac','Apple iMac 21.5" 1.6GHz','Apple_iMac.png','This computer has a 21.5-inch (diagonal) 1920-by-1080-pixel display, stunning 5-millimetre-thin design, Intel Core i5 processor.','APPLEIMAC','DisplayProduct.php');
+insert into PRODUCT values (12,'Acer Aspire','Acer Aspire 23.8" All-in-One Desktop PC','Acer_Aspire.png','Intel® Core™ i3-5005U Dual-core 2GHz with 23.8" Full HD 1920 x 1080 Active Matrix TFT Colour LCD and a 1 TB Hard Drive.','ACERASPIRE','DisplayProduct.php');
+insert into PRODUCT values (13,'HP Pavilion 24"','HP Pavilion 24" All-in-One PC','HP_Pavilion_24.png','This computer has an AMD A6-7310 (2M cache, up to 2.4Ghz), 1TB 7200 RPM SATA 6G 3.5 HDD, 23.8in 16:9 1920x1080 WLED LCD.','HPPAVILION24','DisplayProduct.php');
+insert into PRODUCT values (14,'HP 19.5"','HP 19.5" All-in-One PC','HP_Pavilion_19.png','This computer has an AMD E1-6010 Processor, 4GB RAM and HDDRadeon™ R2 Graphics.','HP19','DisplayProduct.php');
+
 insert into CGRYREL values (1,1,2,null);
 insert into CGRYREL values (2,2,3,null);
 insert into CGRYREL values (3,3,4,null);
@@ -52,12 +59,26 @@ insert into CGPRREL values (5,9,6);
 insert into CGPRREL values (6,9,7);
 insert into CGPRREL values (7,9,8);
 
+insert into CGPRREL values (8,8,9);
+insert into CGPRREL values (9,8,10);
+insert into CGPRREL values (10,8,11);
+insert into CGPRREL values (11,8,12);
+insert into CGPRREL values (12,8,13);
+insert into CGPRREL values (13,8,14);
+
 insert into PRODPRICES values (1,2,1,2498.00);
 insert into PRODPRICES values (2,4,1,3198.00);
 insert into PRODPRICES values (3,5,1,2398.00);
 insert into PRODPRICES values (4,6,1,2598.00);
 insert into PRODPRICES values (5,7,1,498.00);
 insert into PRODPRICES values (6,8,1,1548.00);
+
+insert into PRODPRICES values (7,9,1,2498.00);
+insert into PRODPRICES values (8,10,1,3198.00);
+insert into PRODPRICES values (9,11,1,2398.00);
+insert into PRODPRICES values (10,12,1,2598.00);
+insert into PRODPRICES values (11,13,1,498.00);
+insert into PRODPRICES values (12,14,1,1548.00);
 
 --DELL XPS
 insert into ATTRIBUTE values (1, 2,'Operating System');
@@ -111,6 +132,59 @@ insert into ATTRIBUTE values (38, 8,'Storage');
 insert into ATTRIBUTE values (39, 8,'Processor Type');
 insert into ATTRIBUTE values (40, 8,'RAM');
 insert into ATTRIBUTE values (41, 8,'USB 3.0 Ports');
+
+--HP PAVILION TOUCH
+insert into ATTRIBUTE values (42, 9,'Screen Size (Inches)');
+insert into ATTRIBUTE values (43, 9,'Graphics');
+insert into ATTRIBUTE values (44, 9,'Storage');
+insert into ATTRIBUTE values (45, 9,'Processor Type');
+insert into ATTRIBUTE values (46, 9,'RAM');
+insert into ATTRIBUTE values (47, 9,'USB 3.0 Ports');
+insert into ATTRIBUTE values (48, 9,'USB 2.0 Ports');
+
+--LENOVO IDEACENTRE
+insert into ATTRIBUTE values (49, 10,'Screen Size (Inches)');
+insert into ATTRIBUTE values (50, 10,'Graphics');
+insert into ATTRIBUTE values (51, 10,'Storage');
+insert into ATTRIBUTE values (52, 10,'Processor Type');
+insert into ATTRIBUTE values (53, 10,'RAM');
+insert into ATTRIBUTE values (54, 10,'USB 3.0 Ports');
+
+--APPLE iMAC
+insert into ATTRIBUTE values (55, 11,'Screen Size (Inches)');
+insert into ATTRIBUTE values (56, 11,'Graphics');
+insert into ATTRIBUTE values (57, 11,'Storage');
+insert into ATTRIBUTE values (58, 11,'Processor Type');
+insert into ATTRIBUTE values (59, 11,'RAM');
+insert into ATTRIBUTE values (60, 11,'USB 3.0 Ports');
+insert into ATTRIBUTE values (61, 11,'USB 2.0 Ports');
+
+--ACER ASPIRE
+insert into ATTRIBUTE values (62, 12,'Graphics');
+insert into ATTRIBUTE values (63, 12,'Storage');
+insert into ATTRIBUTE values (64, 12,'Processor Type');
+insert into ATTRIBUTE values (65, 12,'RAM');
+insert into ATTRIBUTE values (66, 12,'USB 3.0 Ports');
+insert into ATTRIBUTE values (67, 12,'Screen Size (Inches)');
+insert into ATTRIBUTE values (68, 12,'USB 2.0 Ports');
+
+--HP PAVILION 24
+insert into ATTRIBUTE values (69, 13,'Graphics');
+insert into ATTRIBUTE values (70, 13,'Storage');
+insert into ATTRIBUTE values (71, 13,'Processor Type');
+insert into ATTRIBUTE values (72, 13,'RAM');
+insert into ATTRIBUTE values (73, 13,'USB 3.0 Ports');
+insert into ATTRIBUTE values (74, 13,'Screen Size (Inches)');
+insert into ATTRIBUTE values (75, 13,'USB 2.0 Ports');
+
+--HP 19.5
+insert into ATTRIBUTE values (76, 14,'Graphics');
+insert into ATTRIBUTE values (77, 14,'Storage');
+insert into ATTRIBUTE values (78, 14,'Processor Type');
+insert into ATTRIBUTE values (79, 14,'RAM');
+insert into ATTRIBUTE values (80, 14,'USB 3.0 Ports');
+insert into ATTRIBUTE values (81, 14,'Screen Size (Inches)');
+insert into ATTRIBUTE values (82, 14,'USB 2.0 Ports');
 
 
 
@@ -166,3 +240,56 @@ insert into ATTRIBUTEVALUE values (38, 8, 38, '128GB Flash storage', 0.00); --St
 insert into ATTRIBUTEVALUE values (39, 8, 39, 'Intel Core i5', 0.00); --Processor
 insert into ATTRIBUTEVALUE values (40, 8, 40, '8GB', 0.00); --RAM
 insert into ATTRIBUTEVALUE values (41, 8, 41, '2', 0.00); --USB 3.0 Ports
+
+--HP PAVILION TOUCH
+insert into ATTRIBUTEVALUE values (42, 9, 42, '23.8', 0.00); --Screen
+insert into ATTRIBUTEVALUE values (43, 9, 43, 'Nvidia GeForce GT930a 2GB DDR5 Graphics', 0.00); --Graphics
+insert into ATTRIBUTEVALUE values (44, 9, 44, '2TB 7200 RPM SATA 3.5 HDD', 0.00); --Storage
+insert into ATTRIBUTEVALUE values (45, 9, 45, 'Intel Core i7-6700T ', 0.00); --Processor
+insert into ATTRIBUTEVALUE values (46, 9, 46, '16GB DDR4L-2133 RAM ', 0.00); --RAM
+insert into ATTRIBUTEVALUE values (47, 9, 47, '2', 0.00); --USB 3.0 Ports
+insert into ATTRIBUTEVALUE values (48, 9, 48, '4', 0.00); --USB 2.0 Ports
+
+--LENOVO IDEACENTRE
+insert into ATTRIBUTEVALUE values (49, 10, 49, '23.8', 0.00); --Screen
+insert into ATTRIBUTEVALUE values (50, 10, 50, 'NVIDIA GT930A 2GB Discrete Graphics', 0.00); --Graphics
+insert into ATTRIBUTEVALUE values (51, 10, 51, '1TB SSHD (8GB Hybrid)', 0.00); --Storage
+insert into ATTRIBUTEVALUE values (52, 10, 52, 'Intel® Core™ i7-6500U Processor', 0.00); --Processor
+insert into ATTRIBUTEVALUE values (53, 10, 53, '16GB RAM', 0.00); --RAM
+insert into ATTRIBUTEVALUE values (54, 10, 54, '4', 0.00); --USB 3.0 Ports
+
+--APPLE iMAC
+insert into ATTRIBUTEVALUE values (55, 11, 55, '21.5', 0.00); --Screen
+insert into ATTRIBUTEVALUE values (56, 11, 56, 'Intel HD Graphics 6000', 0.00); --Graphics
+insert into ATTRIBUTEVALUE values (57, 11, 57, '1TB HDD', 0.00); --Storage
+insert into ATTRIBUTEVALUE values (58, 11, 58, 'Intel Core i5 processor', 0.00); --Processor
+insert into ATTRIBUTEVALUE values (59, 11, 59, '8GB RAM ', 0.00); --RAM
+insert into ATTRIBUTEVALUE values (60, 11, 60, '4', 0.00); --USB 3.0 Ports
+insert into ATTRIBUTEVALUE values (61, 11, 61, '2', 0.00); --USB 2.0 Ports
+
+--ACER ASPIRE
+insert into ATTRIBUTEVALUE values (62, 12, 62, 'NVIDIA GT930A 2GB Discrete Graphics', 0.00); --Graphics
+insert into ATTRIBUTEVALUE values (63, 12, 63, '1TB HDD', 0.00); --Storage
+insert into ATTRIBUTEVALUE values (64, 12, 64, 'Intel® Core™ i3-5005U Dual-core 2GHz', 0.00); --Processor
+insert into ATTRIBUTEVALUE values (65, 12, 65, '4GB RAM', 0.00); --RAM
+insert into ATTRIBUTEVALUE values (66, 12, 66, '2', 0.00); --USB 3.0 Ports
+insert into ATTRIBUTEVALUE values (67, 12, 67, '23.8', 0.00); --Screen
+insert into ATTRIBUTEVALUE values (68, 12, 68, '3', 0.00); --USB 2.0 Ports
+
+--HP PAVILION 24
+insert into ATTRIBUTEVALUE values (69, 13, 69, 'Radeon R4 Graphics', 0.00); --Graphics
+insert into ATTRIBUTEVALUE values (70, 13, 70, '1TB HDD', 0.00); --Storage
+insert into ATTRIBUTEVALUE values (71, 13, 71, 'AMD A6', 0.00); --Processor
+insert into ATTRIBUTEVALUE values (72, 13, 72, '4GB RAM', 0.00); --RAM
+insert into ATTRIBUTEVALUE values (73, 13, 73, '2', 0.00); --USB 3.0 Ports
+insert into ATTRIBUTEVALUE values (74, 13, 74, '24.0', 0.00); --Screen
+insert into ATTRIBUTEVALUE values (75, 13, 75, '4', 0.00); --USB 2.0 Ports
+
+--HP 19.5
+insert into ATTRIBUTEVALUE values (76, 14, 76, 'Radeon R2 Graphics', 0.00); --Graphics
+insert into ATTRIBUTEVALUE values (77, 14, 77, '500GB', 0.00); --Storage
+insert into ATTRIBUTEVALUE values (78, 14, 78, 'AMD E1', 0.00); --Processor
+insert into ATTRIBUTEVALUE values (79, 14, 79, '4GB RAM', 0.00); --RAM
+insert into ATTRIBUTEVALUE values (80, 14, 80, '1', 0.00); --USB 3.0 Ports
+insert into ATTRIBUTEVALUE values (81, 14, 81, '19.5', 0.00); --Screen
+insert into ATTRIBUTEVALUE values (82, 14, 82, '2', 0.00); --USB 2.0 Ports
