@@ -28,11 +28,24 @@
 <?php
 	include 'Functions.php';
 	
-	$categories = get_catnames();
+	
+	if (!$_POST){
+		$category = 9;
+	} else {
+		$category = $_POST["catID"];
+	}
+	
+	$catIDs = get_catIDs();
+	
+	$categories = array();
+	
+	
+	for($j=0; $j < sizeof($catIDs); $j++) {	
+			$categories[] = get_catname($catIDs[$j]);
+	};
 	
 	#needs to be changed to be dynamic
-	$laptop_catID = 9;	
-	$prodIDs = get_IDs($laptop_catID);
+	$prodIDs = get_IDs($category);
 	
 	$headers = array();
 	$prices = array();
@@ -92,7 +105,10 @@
                 <p class="lead">Products</p>
                 <div class="list-group">
 					<?php for($j=0; $j < sizeof($categories); $j++) { ?> 
-						<a href="#" class="list-group-item"><?php echo $categories[$j] ?></a>
+						<form method="post" action="catalogue.php" id="form1">
+							<input type="hidden" name="catID" value=<?php echo $catIDs[$j] ?> />
+							<input type="submit" value="<?php echo $categories[$j] ?>"></button>
+							</form>
 					<?php	} ?>
                 </div>
             </div>

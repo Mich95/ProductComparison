@@ -1,7 +1,6 @@
 /*!
- * Start Bootstrap - Shop Homepage (http://startbootstrap.com/)
+
  * Copyright 2013-2016 Start Bootstrap
- * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap/blob/gh-pages/LICENSE)
  */
 
 body {
@@ -41,9 +40,10 @@ body {
 }
 
 .thumbnail {
-    padding: 0;
+    padding: 3px;
     border-style: solid;
     border-color:#19c589;
+
 
 }
 
@@ -55,4 +55,5 @@ body {
 footer {
     margin: 50px 0;
 }
+.list-group
 

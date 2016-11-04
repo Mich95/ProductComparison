@@ -35,11 +35,32 @@
 	}
 	
 	#function to get prodIDs in a category
-	function get_catnames(){
+	function get_catname($cat_id){
 		global $dbo;
 		
 		# Construct an SQL query as multiple lines for readability
 		$query = "SELECT CAT_NAME";
+		$query .= " FROM CATEGORY";
+		$query .= " WHERE CAT_ID = '".$cat_id."'";
+
+		try {
+			$statement1 = $dbo->query($query);
+		}
+		catch (PDOException $ex) {
+			echo $ex->getMessage();
+			die ("Invalid query");
+		}
+		
+		$row = $statement1->fetch();
+		return $row[0];
+	}
+	
+	#function to get prodIDs in a category
+	function get_catIDs(){
+		global $dbo;
+		
+		# Construct an SQL query as multiple lines for readability
+		$query = "SELECT CAT_ID";
 		$query .= " FROM CATEGORY";
 
 		try {
